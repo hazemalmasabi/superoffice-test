@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة العملاء | سوبر أوفيس</title>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Auth View (Hidden when logged in) -->
+    <div class="auth-container" id="auth-view">
+        <div class="glass-card auth-box">
+            <div class="auth-logo">
+                <i class="fa-solid fa-building-circle-check"></i>
+                سوبر <span>أوفيس</span>
+            </div>
+            
+            <h3 style="text-align: center; margin-bottom: 20px;" id="auth-title">تسجيل الدخول لبوابة العملاء</h3>
+            
+            <form id="login-form">
+                <div class="form-group" id="reg-name-group" style="display: none;">
+                    <label>الاسم بالكامل / اسم الشركة *</label>
+                    <input type="text" class="form-control" id="auth-name" placeholder="مثال: شركة الأعمال المحدودة">
+                </div>
+
+                <div class="form-group">
+                    <label>البريد الإلكتروني *</label>
+                    <input type="email" class="form-control" id="auth-email" placeholder="example@company.com" required value="tech@smart.com">
+                </div>
+
+                <div class="form-group" id="reg-phone-group" style="display: none;">
+                    <label>رقم الجوال *</label>
+                    <input type="tel" class="form-control" id="auth-phone" placeholder="05xxxxxxxx">
+                </div>
+                
+                <div class="form-group">
+                    <label>كلمة المرور *</label>
+                    <input type="password" class="form-control" id="auth-password" placeholder="••••••••" required value="123456">
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%;" id="auth-submit-btn">تسجيل الدخول</button>
+            </form>
+            
+            <div class="auth-footer-text">
+                <span>ليس لديك حساب؟ </span>
+                <a href="#" id="toggle-auth">حساب جديد</a>
+            </div>
+            
+            <p style="font-size: 0.75rem; text-align: center; color: var(--text-muted); margin-top: 15px;" id="auth-tip">
+                يمكنك الدخول مباشرة باستخدام الحساب التجريبي الجاهز المعبأ أعلاه.
+            </p>
+        </div>
+    </div>
+
+    <!-- Portal View (Hidden when logged out) -->
+    <div class="portal-container" id="portal-view" style="display: none;">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <a href="index.html" class="logo" style="color: var(--white);">
+                    <i class="fa-solid fa-building-circle-check"></i>
+                    سوبر <span style="color: var(--primary);">أوفيس</span>
+                </a>
+            </div>
+            
+            <div class="sidebar-menu">
+                <div class="sidebar-link active" data-target="view-overview">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>لوحة المعلومات</span>
+                </div>
+                
+                <div class="sidebar-link" data-target="view-new-booking">
+                    <i class="fa-solid fa-calendar-plus"></i>
+                    <span>حجز مساحة جديدة</span>
+                </div>
+                
+                <div class="sidebar-link" data-target="view-bookings">
+                    <i class="fa-solid fa-file-contract"></i>
+                    <span>حجوزاتي وعقودي</span>
+                </div>
+                
+                <div class="sidebar-link" data-target="view-invoices">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                    <span>الفواتير والمدفوعات</span>
+                </div>
+                
+                <div class="sidebar-link" data-target="view-chat">
+                    <i class="fa-solid fa-comments"></i>
+                    <span>تواصل مع التيم</span>
+                </div>
+                
+                <a href="index.html" class="sidebar-link">
+                    <i class="fa-solid fa-house"></i>
+                    <span>الرجوع للموقع</span>
+                </a>
+                
+                <div class="sidebar-link sidebar-logout" id="logout-btn">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>تسجيل الخروج</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="portal-content">
+            <!-- Portal Header -->
+            <header class="portal-header">
+                <div class="portal-title">
+                    <h1 id="portal-user-welcome">مرحباً بك، شركة التقنية الذكية</h1>
+                    <p>بوابة إدارة المكاتب والحجوزات الإلكترونية الآمنة</p>
+                </div>
+                
+                <div class="user-profile-menu">
+                    <div class="user-avatar" id="user-avatar-initial">ش</div>
+                    <span id="user-profile-name">شركة التقنية الذكية</span>
+                </div>
+            </header>
+
+            <!-- VIEW: OVERVIEW -->
+            <section class="portal-tab-view" id="view-overview">
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="glass-card stat-card">
+                        <div class="stat-details">
+                            <h5>حجزك الحالي</h5>
+                            <h2 style="font-size: 1.3rem;" id="stat-active-office">مكتب خاص 8-CD</h2>
+                        </div>
+                        <div class="stat-icon primary">
+                            <i class="fa-solid fa-building"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="glass-card stat-card">
+                        <div class="stat-details">
+                            <h5>الفواتير غير المدفوعة</h5>
+                            <h2 class="font-number" id="stat-unpaid-invoices">1 فواتير</h2>
+                        </div>
+                        <div class="stat-icon danger">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="glass-card stat-card">
+                        <div class="stat-details">
+                            <h5>إجمالي فترات العقد</h5>
+                            <h2 id="stat-contract-months">3 أشهر</h2>
+                        </div>
+                        <div class="stat-icon success">
+                            <i class="fa-solid fa-calendar-check"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Banner -->
+                <div class="glass-card" style="margin-bottom: 30px; display: grid; grid-template-columns: 1fr 2fr; gap: 30px; align-items: center;">
+                    <img src="https://superoffice.sa/uploads/offices/1721640105.webp" style="border-radius: 12px; height: 180px; width: 100%; object-fit: cover;" alt="مكتبك">
+                    <div>
+                        <span class="badge badge-success" style="margin-bottom: 10px;">عقد نشط</span>
+                        <h3 style="font-size: 1.4rem; margin-bottom: 10px;">تفاصيل المساحة المستأجرة حالياً</h3>
+                        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 15px;">فرع العارض، مكتب خاص رقم 8-CD مخصص لـ 4 موظفين. يشمل العقد خدمات التنظيف، التكييف، الإنترنت فائق السرعة، واستخدام قاعات الاجتماعات.</p>
+                        <button class="btn btn-primary btn-sm" onclick="switchTab('view-new-booking')"><i class="fa-solid fa-circle-plus"></i> حجز مساحة جديدة</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIEW: NEW BOOKING (SECURE BOOKING MIGRATION) -->
+            <section class="portal-tab-view" id="view-new-booking" style="display: none;">
+                <div class="booking-grid">
+                    <!-- Form Box -->
+                    <div class="glass-card booking-box">
+                        <h3 style="margin-bottom: 20px;"><i class="fa-solid fa-file-signature" style="color: var(--primary);"></i> طلب حجز مساحة جديدة وإصدار عقد رقمي</h3>
+                        
+                        <form id="secure-booking-form">
+                            <div class="row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                <div class="form-group">
+                                    <label>الفرع المطلوب *</label>
+                                    <select class="form-control" id="booking-branch" required>
+                                        <option value="">اختر الفرع</option>
+                                        <option value="1">العارض</option>
+                                        <option value="4">السويدي</option>
+                                        <option value="9">الروضة</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>نوع المساحة المطلوبة *</label>
+                                    <select class="form-control" id="booking-space-type" required>
+                                        <option value="">اختر النوع</option>
+                                        <option value="private-office">مكاتب خاصة</option>
+                                        <option value="coworking-space">مساحة عمل مشترك</option>
+                                        <option value="virtual-office">مكتب افتراضي</option>
+                                        <option value="meeting-room">قاعات اجتماعات</option>
+                                        <option value="warehouse">مستودع</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="row" style="display: grid; grid-template-columns: 1fr; gap: 20px;">
+                                <div class="form-group">
+                                    <label>المساحات والوحدات المتاحة حالياً *</label>
+                                    <select class="form-control" id="booking-space-unit" required disabled>
+                                        <option value="">اختر الفرع ونوع المساحة أولاً</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                <div class="form-group">
+                                    <label>تاريخ بدء الإيجار / الحجز *</label>
+                                    <input type="date" class="form-control" id="booking-start-date" required min="2026-07-18">
+                                </div>
+                                
+                                <div class="form-group" id="end-date-group">
+                                    <label id="end-date-label">تاريخ انتهاء الإيجار *</label>
+                                    <input type="date" class="form-control" id="booking-end-date" required>
+                                </div>
+                                
+                                <div class="form-group" id="meeting-hours-group" style="display: none;">
+                                    <label>عدد الساعات المطلوبة *</label>
+                                    <select class="form-control" id="booking-hours">
+                                        <option value="1">ساعة واحدة</option>
+                                        <option value="2">ساعتان</option>
+                                        <option value="4">4 ساعات</option>
+                                        <option value="8">8 ساعات (يوم كامل)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <!-- Signature Canvas -->
+                            <div class="form-group">
+                                <label><i class="fa-solid fa-signature"></i> التوقيع الإلكتروني على العقد الرقمي الموحد *</label>
+                                <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 5px;">أقر بموافقتي التامة على الشروط القانونية المنظمة للتأجير في سوبر أوفيس. ارسم توقيعك أدناه:</p>
+                                <div class="signature-area">
+                                    <canvas id="signature-canvas"></canvas>
+                                    <div class="sig-actions">
+                                        <button type="button" class="btn btn-outline btn-sm" id="clear-signature"><i class="fa-solid fa-eraser"></i> مسح التوقيع</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label><input type="checkbox" id="terms-agree" required> أوافق على شروط عقد إيجار الموحد وجميع بنود اللائحة الداخلية لسوبر أوفيس.</label>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;"><i class="fa-solid fa-file-signature"></i> توقيع العقد وإصدار فاتورة التأجير</button>
+                        </form>
+                    </div>
+                    
+                    <!-- Pricing Sidebar -->
+                    <div class="glass-card booking-summary-box">
+                        <h3>تفاصيل الحجز والأسعار</h3>
+                        <div class="booking-summary-list">
+                            <div class="booking-summary-item">
+                                <span>المساحة المحددة:</span>
+                                <span id="summary-space-name">-</span>
+                            </div>
+                            <div class="booking-summary-item">
+                                <span>الفرع:</span>
+                                <span id="summary-branch">-</span>
+                            </div>
+                            <div class="booking-summary-item">
+                                <span>القيمة الإيجارية المترتبة:</span>
+                                <span class="font-number" id="summary-base-price">0 ريال</span>
+                            </div>
+                            <div class="booking-summary-item">
+                                <span>الضريبة المضافة (15%):</span>
+                                <span class="font-number" id="summary-vat">0 ريال</span>
+                            </div>
+                            <div class="booking-summary-item" id="coupon-discount-row" style="display: none; color: var(--success);">
+                                <span>الخصم المطبق:</span>
+                                <span class="font-number" id="summary-discount">-0 ريال</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>كوبون خصم</label>
+                            <div class="coupon-input-group">
+                                <input type="text" class="form-control" id="coupon-code" placeholder="أدخل كوبون الخصم">
+                                <button type="button" class="btn btn-outline btn-sm" id="apply-coupon">تطبيق</button>
+                            </div>
+                            <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">جرب الكوبون <strong style="color: var(--primary);">SAVE10</strong> للحصول على خصم 10%</p>
+                        </div>
+                        
+                        <div class="booking-total">
+                            <span>إجمالي المطلوب:</span>
+                            <span class="font-number" id="summary-total">0 ريال</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIEW: BOOKINGS -->
+            <section class="portal-tab-view" id="view-bookings" style="display: none;">
+                <div class="glass-card">
+                    <h3>سجل الحجوزات والتعاقدات</h3>
+                    <div class="table-container">
+                        <table class="custom-table">
+                            <thead>
+                                <tr>
+                                    <th>رقم العقد</th>
+                                    <th>نوع المساحة</th>
+                                    <th>الفرع</th>
+                                    <th>تاريخ البدء</th>
+                                    <th>تاريخ الانتهاء</th>
+                                    <th>المبلغ الإجمالي</th>
+                                    <th>الحالة</th>
+                                    <th>الإجراء</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bookings-table-body">
+                                <!-- Loaded dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIEW: INVOICES -->
+            <section class="portal-tab-view" id="view-invoices" style="display: none;">
+                <div class="glass-card">
+                    <h3>كشف الفواتير والمدفوعات</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">يمكنك استعراض تفاصيل كافة الفواتير وسداد المستحق منها إلكترونياً.</p>
+                    
+                    <div class="table-container">
+                        <table class="custom-table">
+                            <thead>
+                                <tr>
+                                    <th>رقم الفاتورة</th>
+                                    <th>البيان والخدمة</th>
+                                    <th>المبلغ</th>
+                                    <th>تاريخ الاستحقاق</th>
+                                    <th>الحالة</th>
+                                    <th>الإجراء</th>
+                                </tr>
+                            </thead>
+                            <tbody id="invoices-table-body">
+                                <!-- Loaded dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIEW: CHAT -->
+            <section class="portal-tab-view" id="view-chat" style="display: none;">
+                <div class="chat-wrapper">
+                    <div class="glass-card chat-sidebar">
+                        <h4 style="margin-bottom: 15px;">قنوات الدعم</h4>
+                        <div class="chat-user-item active">
+                            <div class="user-avatar"><i class="fa-solid fa-headset"></i></div>
+                            <div class="chat-user-info">
+                                <h4>فريق خدمة العملاء</h4>
+                                <p id="chat-last-message-preview">مرحباً، تم عمل صيانة شاملة للمكيفات...</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-main">
+                        <div class="chat-header">
+                            <div class="user-avatar" style="background-color: var(--primary);"><i class="fa-solid fa-headset"></i></div>
+                            <div>
+                                <h4>فريق إدارة سوبر أوفيس</h4>
+                                <small style="color: var(--success); font-weight: 600;"><i class="fa-solid fa-circle"></i> متصل لمساعدتك</small>
+                            </div>
+                        </div>
+                        
+                        <div class="chat-messages" id="chat-messages-container">
+                            <!-- Loaded dynamically -->
+                        </div>
+                        
+                        <form id="chat-send-form" class="chat-footer">
+                            <input type="text" class="form-control" id="chat-input-text" placeholder="اكتب رسالتك أو طلبك هنا..." required autocomplete="off">
+                            <button type="submit" class="btn btn-primary"><i class="fa-regular fa-paper-plane"></i> إرسال</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- PAYMENT MODAL -->
+    <div class="modal" id="payment-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>سداد الفاتورة إلكترونياً</h3>
+                <span class="modal-close" id="close-payment-modal">&times;</span>
+            </div>
+            
+            <div style="background-color: var(--grey-100); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <span>رقم الفاتورة:</span>
+                    <strong id="modal-invoice-id">-</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span>إجمالي المبلغ المستحق:</span>
+                    <strong style="color: var(--primary);" id="modal-invoice-amount">0 ريال</strong>
+                </div>
+            </div>
+            
+            <form id="payment-process-form">
+                <div class="form-group">
+                    <label>اسم حامل البطاقة *</label>
+                    <input type="text" class="form-control" required placeholder="مثال: أحمد الحربي">
+                </div>
+                
+                <div class="form-group">
+                    <label>رقم البطاقة الائتمانية *</label>
+                    <input type="text" class="form-control font-number" required placeholder="4000 1234 5678 9010" maxlength="19">
+                </div>
+                
+                <div class="row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="form-group">
+                        <label>تاريخ الانتهاء *</label>
+                        <input type="text" class="form-control font-number" required placeholder="MM/YY" maxlength="5">
+                    </div>
+                    <div class="form-group">
+                        <label>رمز الأمان CVV *</label>
+                        <input type="password" class="form-control font-number" required placeholder="•••" maxlength="3">
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 10px;"><i class="fa-solid fa-lock"></i> ادفع الآن (مدى / فيزا)</button>
+                <button type="button" class="btn btn-outline" style="width: 100%; border-color: #000; color: #000;" id="apple-pay-btn"><i class="fa-brands fa-apple"></i> الدفع السريع باستخدام Apple Pay</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- BOOKING EXTENSION MODAL -->
+    <div class="modal" id="extension-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>تمديد عقد المساحة المستأجرة</h3>
+                <span class="modal-close" id="close-extension-modal">&times;</span>
+            </div>
+            
+            <div style="background-color: var(--grey-100); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <span>نوع المساحة:</span>
+                    <strong id="ext-modal-space-name">-</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span>تاريخ انتهاء الإيجار الحالي:</span>
+                    <strong id="ext-modal-end-date">-</strong>
+                </div>
+            </div>
+            
+            <form id="extension-process-form">
+                <input type="hidden" id="ext-booking-id">
+                
+                <div class="form-group">
+                    <label>مدة التمديد المطلوبة *</label>
+                    <select class="form-control" id="ext-duration-months" required>
+                        <option value="1">تمديد لشهر واحد</option>
+                        <option value="3">تمديد لـ 3 أشهر (خصم 5%)</option>
+                        <option value="6">تمديد لـ 6 أشهر (خصم 10%)</option>
+                        <option value="12">تمديد لسنة كاملة (خصم 15%)</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%;"><i class="fa-solid fa-circle-plus"></i> تقديم طلب التمديد وإصدار الفاتورة</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- App Scripts Dependencies -->
+    <script src="app.js"></script>
+    <script>
+        const authView = document.getElementById('auth-view');
+        const portalView = document.getElementById('portal-view');
+        
+        // Forms
+        const loginForm = document.getElementById('login-form');
+        const authNameInput = document.getElementById('auth-name');
+        const authEmailInput = document.getElementById('auth-email');
+        const authPhoneInput = document.getElementById('auth-phone');
+        const authPasswordInput = document.getElementById('auth-password');
+        const authSubmitBtn = document.getElementById('auth-submit-btn');
+        const toggleAuthBtn = document.getElementById('toggle-auth');
+        const authTitle = document.getElementById('auth-title');
+        const authTip = document.getElementById('auth-tip');
+        
+        // Form Groups (registration-only inputs)
+        const nameGroup = document.getElementById('reg-name-group');
+        const phoneGroup = document.getElementById('reg-phone-group');
+        
+        // User views
+        const sidebarLinks = document.querySelectorAll('.sidebar-link[data-target]');
+        const tabViews = document.querySelectorAll('.portal-tab-view');
+        
+        // Modals
+        const paymentModal = document.getElementById('payment-modal');
+        const extensionModal = document.getElementById('extension-modal');
+        
+        // New Booking Form fields
+        const bookingBranch = document.getElementById('booking-branch');
+        const bookingSpaceType = document.getElementById('booking-space-type');
+        const bookingSpaceUnit = document.getElementById('booking-space-unit');
+        const bookingStartDate = document.getElementById('booking-start-date');
+        const bookingEndDate = document.getElementById('booking-end-date');
+        const bookingHours = document.getElementById('booking-hours');
+        
+        // Group visibility toggling
+        const endDateGroup = document.getElementById('end-date-group');
+        const meetingHoursGroup = document.getElementById('meeting-hours-group');
+        
+        // Summary elements
+        const summarySpaceName = document.getElementById('summary-space-name');
+        const summaryBranch = document.getElementById('summary-branch');
+        const summaryBasePrice = document.getElementById('summary-base-price');
+        const summaryVat = document.getElementById('summary-vat');
+        const discountRow = document.getElementById('coupon-discount-row');
+        const summaryDiscount = document.getElementById('summary-discount');
+        const summaryTotal = document.getElementById('summary-total');
+        const couponInput = document.getElementById('coupon-code');
+        const applyCouponBtn = document.getElementById('apply-coupon');
+
+        let selectedInvoiceId = null;
+        let isRegistering = false;
+        let isCouponApplied = false;
+
+        // Toggle registration fields
+        toggleAuthBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            isRegistering = !isRegistering;
+            if (isRegistering) {
+                authTitle.textContent = "إنشاء حساب عميل جديد";
+                authSubmitBtn.textContent = "تسجيل الحساب";
+                toggleAuthBtn.textContent = "لديك حساب؟ تسجيل دخول";
+                nameGroup.style.display = 'block';
+                phoneGroup.style.display = 'block';
+                authTip.style.display = 'none';
+                
+                authNameInput.required = true;
+                authPhoneInput.required = true;
+            } else {
+                authTitle.textContent = "تسجيل الدخول لبوابة العملاء";
+                authSubmitBtn.textContent = "تسجيل الدخول";
+                toggleAuthBtn.textContent = "حساب جديد";
+                nameGroup.style.display = 'none';
+                phoneGroup.style.display = 'none';
+                authTip.style.display = 'block';
+                
+                authNameInput.required = false;
+                authPhoneInput.required = false;
+            }
+        });
+
+        // Authentication Submission Handler
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = authEmailInput.value.trim();
+            const password = authPasswordInput.value.trim();
+
+            if (isRegistering) {
+                DB.setCurrentUser({
+                    name: authNameInput.value.trim(),
+                    email: email,
+                    phone: authPhoneInput.value.trim(),
+                    type: "client"
+                });
+                alert('تم إنشاء حساب العميل بنجاح! مرحباً بك في سوبر أوفيس.');
+            } else {
+                if (email === "tech@smart.com" && password === "123456") {
+                    DB.setCurrentUser({
+                        name: "شركة التقنية الذكية",
+                        email: "tech@smart.com",
+                        phone: "0505555555",
+                        type: "client"
+                    });
+                } else {
+                    DB.setCurrentUser({
+                        name: email.split('@')[0].toUpperCase(),
+                        email: email,
+                        phone: "0500000000",
+                        type: "client"
+                    });
+                }
+            }
+
+            checkUserLogin();
+            
+            // Check if there was a redirected book parameter in the query string
+            handleBookingRedirectParams();
+        });
+
+        // Toggle Sidebar Tab View switcher
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                const target = this.getAttribute('data-target');
+                switchTab(target);
+            });
+        });
+
+        function switchTab(targetTabId) {
+            sidebarLinks.forEach(link => {
+                if (link.getAttribute('data-target') === targetTabId) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+
+            tabViews.forEach(view => {
+                if (view.id === targetTabId) {
+                    view.style.display = 'block';
+                } else {
+                    view.style.display = 'none';
+                }
+            });
+
+            // Reload relevant views data
+            if (targetTabId === 'view-bookings') loadBookingsTable();
+            if (targetTabId === 'view-invoices') loadInvoicesTable();
+            if (targetTabId === 'view-chat') loadChatArea();
+            if (targetTabId === 'view-new-booking') resetBookingForm();
+        }
+
+        // Check Login Session on page load
+        function checkUserLogin() {
+            const user = DB.getCurrentUser();
+            if (user && user.type === 'client') {
+                authView.style.display = 'none';
+                portalView.style.display = 'flex';
+                
+                document.getElementById('portal-user-welcome').textContent = `مرحباً بك، ${user.name}`;
+                document.getElementById('user-profile-name').textContent = user.name;
+                document.getElementById('user-avatar-initial').textContent = user.name.charAt(0);
+                
+                loadOverviewStats();
+            } else {
+                authView.style.display = 'flex';
+                portalView.style.display = 'none';
+            }
+        }
+
+        // Stats Dashboard overview calculator
+        function loadOverviewStats() {
+            const user = DB.getCurrentUser();
+            const bookings = DB.getBookings().filter(b => b.clientName === user.name);
+            const invoices = DB.getInvoices().filter(inv => inv.clientName === user.name);
+            const unpaid = invoices.filter(inv => inv.status === 'unpaid');
+            
+            document.getElementById('stat-active-office').textContent = bookings.length > 0 ? bookings[0].type : "لا يوجد مساحة نشطة";
+            document.getElementById('stat-unpaid-invoices').textContent = `${unpaid.length} فواتير`;
+            
+            if (bookings.length > 0) {
+                const start = new Date(bookings[0].startDate);
+                const end = new Date(bookings[0].endDate);
+                const diffTime = Math.abs(end - start);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                const months = Math.round(diffDays / 30);
+                document.getElementById('stat-contract-months').textContent = `${months || 1} أشهر`;
+            } else {
+                document.getElementById('stat-contract-months').textContent = "0 أشهر";
+            }
+        }
+
+        // ==================== NEW BOOKING MODULE ====================
+        function resetBookingForm() {
+            bookingBranch.value = "";
+            bookingSpaceType.value = "";
+            bookingSpaceUnit.innerHTML = '<option value="">اختر الفرع ونوع المساحة أولاً</option>';
+            bookingSpaceUnit.disabled = true;
+            bookingStartDate.value = "";
+            bookingEndDate.value = "";
+            bookingHours.value = "1";
+            
+            endDateGroup.style.display = "block";
+            meetingHoursGroup.style.display = "none";
+            
+            summarySpaceName.textContent = "-";
+            summaryBranch.textContent = "-";
+            updateBookingSummary(0);
+        }
+
+        // Filter units when branch or type changes
+        bookingBranch.addEventListener('change', populateAvailableUnits);
+        bookingSpaceType.addEventListener('change', populateAvailableUnits);
+
+        function populateAvailableUnits() {
+            const branchId = parseInt(bookingBranch.value);
+            const type = bookingSpaceType.value;
+            
+            bookingSpaceUnit.innerHTML = '<option value="">اختر الوحدة المطلوبة</option>';
+            
+            if (!branchId || !type) {
+                bookingSpaceUnit.disabled = true;
+                return;
+            }
+
+            const spaces = DB.getSpaces();
+            // Filter available spaces (state = 1) matching branch and type
+            const availableSpaces = spaces.filter(s => s.branchId === branchId && s.type === type && s.state === 1);
+
+            if (availableSpaces.length === 0) {
+                bookingSpaceUnit.innerHTML = '<option value="">لا توجد مساحات متاحة حالياً في هذا الفرع</option>';
+                bookingSpaceUnit.disabled = true;
+                return;
+            }
+
+            bookingSpaceUnit.disabled = false;
+            availableSpaces.forEach(s => {
+                const opt = document.createElement('option');
+                opt.value = s.id;
+                opt.textContent = `${s.name} (السعر: ${s.price} ريال / ${s.pricePeriod})`;
+                bookingSpaceUnit.appendChild(opt);
+            });
+
+            // Handle hourly inputs visibility
+            if (type === 'meeting-room') {
+                endDateGroup.style.display = "none";
+                meetingHoursGroup.style.display = "block";
+                bookingEndDate.required = false;
+            } else {
+                endDateGroup.style.display = "block";
+                meetingHoursGroup.style.display = "none";
+                bookingEndDate.required = true;
+            }
+        }
+
+        bookingSpaceUnit.addEventListener('change', calculateBookingPrice);
+        bookingStartDate.addEventListener('change', calculateBookingPrice);
+        bookingEndDate.addEventListener('change', calculateBookingPrice);
+        bookingHours.addEventListener('change', calculateBookingPrice);
+
+        function calculateBookingPrice() {
+            const unitId = parseInt(bookingSpaceUnit.value);
+            if (!unitId) {
+                summarySpaceName.textContent = "-";
+                summaryBranch.textContent = "-";
+                updateBookingSummary(0);
+                return;
+            }
+
+            const spaces = DB.getSpaces();
+            const space = spaces.find(s => s.id === unitId);
+            const branches = DB.getBranches();
+            const branchName = branches.find(b => b.id === space.branchId)?.name || "";
+
+            summarySpaceName.textContent = space.name;
+            summaryBranch.textContent = branchName;
+
+            let basePrice = space.price;
+
+            if (space.type === 'meeting-room') {
+                // multiply by hours
+                const hours = parseInt(bookingHours.value) || 1;
+                basePrice = space.price * hours;
+            } else {
+                // multiply by months if dates are set
+                const start = bookingStartDate.value ? new Date(bookingStartDate.value) : null;
+                const end = bookingEndDate.value ? new Date(bookingEndDate.value) : null;
+                if (start && end && end > start) {
+                    const diffTime = Math.abs(end - start);
+                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                    const months = Math.ceil(diffDays / 30);
+                    basePrice = space.price * months;
+                }
+            }
+
+            updateBookingSummary(basePrice);
+        }
+
+        applyCouponBtn.addEventListener('click', function() {
+            const code = couponInput.value.trim().toUpperCase();
+            if (code === 'SAVE10') {
+                isCouponApplied = true;
+                alert('تم تطبيق الكوبون بنجاح! خصم 10%');
+                calculateBookingPrice();
+            } else {
+                isCouponApplied = false;
+                alert('الكوبون غير صحيح!');
+                calculateBookingPrice();
+            }
+        });
+
+        function updateBookingSummary(basePrice) {
+            let discount = 0;
+            if (isCouponApplied && basePrice > 0) {
+                discount = basePrice * 0.1;
+                discountRow.style.display = 'flex';
+                summaryDiscount.textContent = `${discount.toFixed(2)} ريال-`;
+            } else {
+                discountRow.style.display = 'none';
+            }
+
+            const beforeTax = basePrice - discount;
+            const vat = beforeTax * 0.15;
+            const total = beforeTax + vat;
+
+            summaryBasePrice.textContent = `${basePrice.toFixed(2)} ريال`;
+            summaryVat.textContent = `${vat.toFixed(2)} ريال`;
+            summaryTotal.textContent = `${total.toFixed(2)} ريال`;
+            summaryTotal.setAttribute('data-value', Math.round(total));
+        }
+
+        // Canvas Drawing initialization
+        const canvas = document.getElementById('signature-canvas');
+        const ctx = canvas.getContext('2d');
+        let isDrawing = false;
+
+        function resizeCanvas() {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = 180;
+            ctx.strokeStyle = '#1F2224';
+            ctx.lineWidth = 2.5;
+            ctx.lineCap = 'round';
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function getMousePos(canvasDom, e) {
+            const rect = canvasDom.getBoundingClientRect();
+            if (e.touches && e.touches.length > 0) {
+                return {
+                    x: e.touches[0].clientX - rect.left,
+                    y: e.touches[0].clientY - rect.top
+                };
+            }
+            return {
+                x: e.clientX - rect.left,
+                y: e.clientY - rect.top
+            };
+        }
+
+        canvas.addEventListener('mousedown', (e) => {
+            isDrawing = true;
+            const pos = getMousePos(canvas, e);
+            ctx.beginPath();
+            ctx.moveTo(pos.x, pos.y);
+            e.preventDefault();
+        });
+        canvas.addEventListener('mousemove', (e) => {
+            if (!isDrawing) return;
+            const pos = getMousePos(canvas, e);
+            ctx.lineTo(pos.x, pos.y);
+            ctx.stroke();
+            e.preventDefault();
+        });
+        canvas.addEventListener('mouseup', () => isDrawing = false);
+        canvas.addEventListener('mouseout', () => isDrawing = false);
+        canvas.addEventListener('touchstart', (e) => {
+            isDrawing = true;
+            const pos = getMousePos(canvas, e);
+            ctx.beginPath();
+            ctx.moveTo(pos.x, pos.y);
+            e.preventDefault();
+        });
+        canvas.addEventListener('touchmove', (e) => {
+            if (!isDrawing) return;
+            const pos = getMousePos(canvas, e);
+            ctx.lineTo(pos.x, pos.y);
+            ctx.stroke();
+            e.preventDefault();
+        });
+        canvas.addEventListener('touchend', () => isDrawing = false);
+
+        document.getElementById('clear-signature').addEventListener('click', () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        });
+
+        // Booking Submit Action
+        document.getElementById('secure-booking-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Check Signature
+            const buffer = new Uint32Array(ctx.getImageData(0, 0, canvas.width, canvas.height).data.buffer);
+            const hasSigned = buffer.some(color => color !== 0);
+
+            if (!hasSigned) {
+                alert('يجب التوقيع إلكترونياً لتوقيع عقد الإيجار الموحد!');
+                return;
+            }
+
+            const unitId = parseInt(bookingSpaceUnit.value);
+            const spaces = DB.getSpaces();
+            const space = spaces.find(s => s.id === unitId);
+            const branches = DB.getBranches();
+            const branchName = branches.find(b => b.id === space.branchId)?.name || "";
+            const user = DB.getCurrentUser();
+
+            let end = bookingEndDate.value;
+            if (space.type === 'meeting-room') {
+                const hours = parseInt(bookingHours.value);
+                end = `${bookingStartDate.value} (لمدة ${hours} ساعات)`;
+            }
+
+            const bookingData = {
+                clientName: user.name,
+                spaceId: space.id,
+                spaceName: space.name,
+                branchName: branchName,
+                startDate: bookingStartDate.value,
+                endDate: end,
+                totalPrice: parseInt(summaryTotal.getAttribute('data-value')) || 0
+            };
+
+            const result = DB.bookSpace(bookingData);
+            alert(`تم توقيع العقد وحجز المساحة بنجاح!\nرقم الحجز الموحد: ${result.bookingId}\nرقم الفاتورة الصادرة: ${result.invoiceId}\n\nيمكنك الآن استعراض عقودك وسداد الفاتورة من شاشة المدفوعات.`);
+            
+            switchTab('view-bookings');
+        });
+
+
+        // ==================== OTHER TAB MODULES ====================
+
+        // Load Bookings Table
+        function loadBookingsTable() {
+            const user = DB.getCurrentUser();
+            const bookings = DB.getBookings().filter(b => b.clientName === user.name);
+            const tbody = document.getElementById('bookings-table-body');
+            tbody.innerHTML = '';
+            
+            if (bookings.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;">ليس لديك أي حجوزات نشطة حالياً.</td></tr>';
+                return;
+            }
+            
+            bookings.forEach(b => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="font-number">${b.id}</td>
+                    <td><strong>${b.type}</strong></td>
+                    <td>${b.branch}</td>
+                    <td class="font-number">${b.startDate}</td>
+                    <td class="font-number">${b.endDate}</td>
+                    <td class="font-number" style="font-weight:700;">${b.amount} ريال</td>
+                    <td><span class="badge badge-success">${b.status}</span></td>
+                    <td>
+                        <button class="btn btn-outline btn-sm" onclick="openExtensionModal('${b.id}', '${b.type}', '${b.endDate}')"><i class="fa-solid fa-clock-rotate-left"></i> تمديد العقد</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Load Invoices Table
+        function loadInvoicesTable() {
+            const user = DB.getCurrentUser();
+            const invoices = DB.getInvoices().filter(inv => inv.clientName === user.name);
+            const tbody = document.getElementById('invoices-table-body');
+            tbody.innerHTML = '';
+            
+            if (invoices.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">لا توجد فواتير صادر لحسابك.</td></tr>';
+                return;
+            }
+            
+            invoices.forEach(inv => {
+                const tr = document.createElement('tr');
+                const isUnpaid = inv.status === 'unpaid';
+                
+                tr.innerHTML = `
+                    <td class="font-number">${inv.id}</td>
+                    <td><strong>${inv.type}</strong></td>
+                    <td class="font-number" style="font-weight:700;">${inv.amount} ريال</td>
+                    <td class="font-number">${inv.dueDate}</td>
+                    <td>
+                        <span class="badge ${isUnpaid ? 'badge-danger' : 'badge-success'}">
+                            ${isUnpaid ? 'غير مدفوعة' : 'مدفوعة'}
+                        </span>
+                    </td>
+                    <td>
+                        ${isUnpaid ? `<button class="btn btn-primary btn-sm" onclick="openPaymentModal('${inv.id}', ${inv.amount})"><i class="fa-solid fa-wallet"></i> ادفع الآن</button>` : `<span style="color:var(--success); font-weight:600;"><i class="fa-solid fa-circle-check"></i> مكتملة</span>`}
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Open Payment Modal
+        window.openPaymentModal = function(invoiceId, amount) {
+            selectedInvoiceId = invoiceId;
+            document.getElementById('modal-invoice-id').textContent = invoiceId;
+            document.getElementById('modal-invoice-amount').textContent = amount + " ريال";
+            paymentModal.classList.add('active');
+        };
+
+        document.getElementById('close-payment-modal').addEventListener('click', function() {
+            paymentModal.classList.remove('active');
+        });
+
+        document.getElementById('payment-process-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (selectedInvoiceId) {
+                DB.payInvoice(selectedInvoiceId);
+                alert(`تم سداد الفاتورة ${selectedInvoiceId} بنجاح!\nشكراً لتعاملك مع سوبر أوفيس.`);
+                paymentModal.classList.remove('active');
+                loadInvoicesTable();
+                loadOverviewStats();
+            }
+        });
+
+        document.getElementById('apple-pay-btn').addEventListener('click', function() {
+            if (selectedInvoiceId) {
+                DB.payInvoice(selectedInvoiceId);
+                alert(`[Apple Pay] تم التفويض والسداد للفاتورة ${selectedInvoiceId} بنجاح!`);
+                paymentModal.classList.remove('active');
+                loadInvoicesTable();
+                loadOverviewStats();
+            }
+        });
+
+        // Open Extension Modal
+        window.openExtensionModal = function(bookingId, spaceName, endDate) {
+            document.getElementById('ext-booking-id').value = bookingId;
+            document.getElementById('ext-modal-space-name').textContent = spaceName;
+            document.getElementById('ext-modal-end-date').textContent = endDate;
+            extensionModal.classList.add('active');
+        };
+
+        document.getElementById('close-extension-modal').addEventListener('click', function() {
+            extensionModal.classList.remove('active');
+        });
+
+        document.getElementById('extension-process-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const bookingId = document.getElementById('ext-booking-id').value;
+            const months = document.getElementById('ext-duration-months').value;
+            
+            DB.extendBooking(bookingId, months);
+            alert(`تم تقديم طلب التمديد بنجاح!\nتم تمديد العقد لـ ${months} أشهر إضافية وصدرت فاتورة جديدة مستحقة السداد.`);
+            extensionModal.classList.remove('active');
+            loadBookingsTable();
+            loadOverviewStats();
+        });
+
+        // Logout
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            DB.setCurrentUser(null);
+            checkUserLogin();
+        });
+
+        // Live Chat Simulation Logic
+        const chatInputText = document.getElementById('chat-input-text');
+        const chatSendForm = document.getElementById('chat-send-form');
+        const chatMessagesContainer = document.getElementById('chat-messages-container');
+
+        function loadChatArea() {
+            const user = DB.getCurrentUser();
+            const chats = DB.getChats();
+            const chat = chats.find(c => c.clientEmail === user.email);
+            
+            chatMessagesContainer.innerHTML = '';
+            
+            if (!chat || chat.messages.length === 0) {
+                chatMessagesContainer.innerHTML = '<p style="text-align:center; color:var(--text-muted); margin-top:20px;">أهلاً بك! اكتب أي رسالة لبدء التحدث مع فريق سوبر أوفيس.</p>';
+                return;
+            }
+            
+            chat.messages.forEach(msg => {
+                const bubble = document.createElement('div');
+                bubble.className = `chat-bubble ${msg.sender === 'client' ? 'sent' : 'received'}`;
+                
+                const timeFormatted = new Date(msg.time).toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' });
+                bubble.innerHTML = `
+                    <span>${msg.text}</span>
+                    <span class="chat-time">${timeFormatted}</span>
+                `;
+                chatMessagesContainer.appendChild(bubble);
+            });
+            
+            chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+            
+            const lastMsg = chat.messages[chat.messages.length - 1];
+            document.getElementById('chat-last-message-preview').textContent = lastMsg ? lastMsg.text : '';
+        }
+
+        chatSendForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const user = DB.getCurrentUser();
+            const text = chatInputText.value.trim();
+            if (!text) return;
+            
+            DB.sendChatMessage(user.email, text, 'client');
+            chatInputText.value = '';
+            loadChatArea();
+            
+            setTimeout(function() {
+                DB.sendChatMessage(user.email, "شكراً لتواصلك مع سوبر أوفيس، تم استلام طلبك رقم وصيانتك وسيجيبك أحد موظفي الفرع حالاً.", 'admin');
+                loadChatArea();
+            }, 2500);
+        });
+
+        // Handle Booking Redirect Params when user gets redirected from homepage with ?book=123
+        function handleBookingRedirectParams() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const bookSpaceId = urlParams.get('book');
+            
+            if (bookSpaceId) {
+                const user = DB.getCurrentUser();
+                if (user && user.type === 'client') {
+                    // switch to new booking tab
+                    switchTab('view-new-booking');
+                    
+                    // fetch space info from localstorage
+                    const spaces = DB.getSpaces();
+                    const space = spaces.find(s => s.id === parseInt(bookSpaceId));
+                    if (space) {
+                        // Prefill form
+                        bookingBranch.value = space.branchId;
+                        bookingSpaceType.value = space.type;
+                        
+                        populateAvailableUnits();
+                        bookingSpaceUnit.value = space.id;
+                        calculateBookingPrice();
+                    }
+                }
+            }
+        }
+
+        // Run checks
+        checkUserLogin();
+        handleBookingRedirectParams();
+    </script>
+</body>
+</html>

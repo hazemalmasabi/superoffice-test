@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم الإدارة | سوبر أوفيس</title>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="portal-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <a href="index.html" class="logo" style="color: var(--white);">
+                    <i class="fa-solid fa-building-circle-check"></i>
+                    سوبر <span style="color: var(--primary);">أوفيس</span>
+                </a>
+                <span style="font-size: 0.75rem; color: var(--primary); font-weight: 700; display: block; margin-top: 5px;">لوحة المسؤولين</span>
+            </div>
+            
+            <div class="sidebar-menu">
+                <div class="sidebar-link active" data-target="view-overview">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>إحصائيات المنصة</span>
+                </div>
+                
+                <div class="sidebar-link" data-target="view-spaces">
+                    <i class="fa-solid fa-cubes"></i>
+                    <span>إدارة المساحات</span>
+                </div>
+                
+                <div class="sidebar-link" data-target="view-customers">
+                    <i class="fa-solid fa-users"></i>
+                    <span>قائمة العملاء</span>
+                </div>
+                
+                <div class="sidebar-link" data-target="view-invoices">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                    <span>الفواتير والحسابات</span>
+                </div>
+                
+                <div class="sidebar-link" data-target="view-support">
+                    <i class="fa-solid fa-headset"></i>
+                    <span>رسائل الدعم الفني</span>
+                </div>
+                
+                <a href="index.html" class="sidebar-link">
+                    <i class="fa-solid fa-house"></i>
+                    <span>الرجوع للموقع</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="portal-content">
+            <!-- Portal Header -->
+            <header class="portal-header">
+                <div class="portal-title">
+                    <h1>لوحة تحكم الإدارة العامة</h1>
+                    <p>إدارة الفروع، المساحات، وعقود المستأجرين</p>
+                </div>
+                
+                <div class="user-profile-menu">
+                    <div class="user-avatar" style="background-color: var(--dark-slate);">م</div>
+                    <span>المدير المسؤول</span>
+                </div>
+            </header>
+
+            <!-- VIEW: OVERVIEW -->
+            <section class="portal-tab-view" id="view-overview">
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="glass-card stat-card">
+                        <div class="stat-details">
+                            <h5>إجمالي المساحات المتاحة</h5>
+                            <h2 class="font-number" id="stat-total-spaces">0 مساحة</h2>
+                        </div>
+                        <div class="stat-icon primary">
+                            <i class="fa-solid fa-cubes"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="glass-card stat-card">
+                        <div class="stat-details">
+                            <h5>العقود والحجوزات النشطة</h5>
+                            <h2 class="font-number" id="stat-active-bookings">0 عقد</h2>
+                        </div>
+                        <div class="stat-icon success">
+                            <i class="fa-solid fa-file-contract"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="glass-card stat-card">
+                        <div class="stat-details">
+                            <h5>إجمالي الإيرادات الصورية</h5>
+                            <h2 class="font-number" id="stat-total-revenue">0 ريال</h2>
+                        </div>
+                        <div class="stat-icon warning">
+                            <i class="fa-solid fa-vault"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="glass-card stat-card">
+                        <div class="stat-details">
+                            <h5>الفواتير غير المدفوعة</h5>
+                            <h2 class="font-number" id="stat-unpaid-count">0 فاتورة</h2>
+                        </div>
+                        <div class="stat-icon danger">
+                            <i class="fa-solid fa-receipt"></i>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIEW: SPACES -->
+            <section class="portal-tab-view" id="view-spaces" style="display: none;">
+                <!-- Add New Space Form -->
+                <div class="glass-card" style="margin-bottom: 30px;">
+                    <h3><i class="fa-solid fa-circle-plus" style="color:var(--primary);"></i> إضافة مساحة أو مكتب جديد للفرع</h3>
+                    <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:20px;">قم بإدخال بيانات المساحة وتحديد الفرع لتعرض فوراً للزوار لحجزها.</p>
+                    
+                    <form id="add-space-form">
+                        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:20px;">
+                            <div class="form-group">
+                                <label>اسم / رقم المكتب *</label>
+                                <input type="text" class="form-control" id="space-name" placeholder="مثال: مكتب 10-A" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>الفرع التابع له *</label>
+                                <select class="form-control" id="space-branch" required>
+                                    <option value="1">فرع العارض</option>
+                                    <option value="4">فرع السويدي</option>
+                                    <option value="9">فرع الروضة</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>نوع المساحة *</label>
+                                <select class="form-control" id="space-type" required>
+                                    <option value="private-office">مكتب خاص</option>
+                                    <option value="coworking-space">مساحة عمل مشترك</option>
+                                    <option value="virtual-office">مكتب افتراضي</option>
+                                    <option value="warehouse">مستودع</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>السعر بالريال *</label>
+                                <input type="number" class="form-control font-number" id="space-price" placeholder="4500" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>دورة السعر *</label>
+                                <select class="form-control" id="space-period" required>
+                                    <option value="شهر">شهرياً</option>
+                                    <option value="سنة">سنوياً</option>
+                                    <option value="ساعة">بالساعة</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>سعة الأفراد *</label>
+                                <input type="text" class="form-control" id="space-capacity" placeholder="مثال: 1 - 4 موظفين" required>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="margin-top: 10px;"><i class="fa-solid fa-folder-plus"></i> إضافة المساحة وحفظها</button>
+                    </form>
+                </div>
+
+                <!-- Existing Spaces List -->
+                <div class="glass-card">
+                    <h3 style="margin-bottom: 20px;">المساحات والمكاتب المسجلة حالياً</h3>
+                    <div class="admin-spaces-grid" id="admin-spaces-grid-container">
+                        <!-- Loaded dynamically -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIEW: CUSTOMERS -->
+            <section class="portal-tab-view" id="view-customers" style="display: none;">
+                <div class="glass-card">
+                    <h3>جدول عقود المستأجرين النشطة</h3>
+                    <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:20px;">متابعة فترات العقود وتواريخ انتهائها وإجمالي قيمتها لكل عميل.</p>
+                    
+                    <div class="table-container">
+                        <table class="custom-table">
+                            <thead>
+                                <tr>
+                                    <th>رقم العقد</th>
+                                    <th>العميل / الشركة</th>
+                                    <th>نوع المساحة</th>
+                                    <th>الفرع</th>
+                                    <th>تاريخ البدء</th>
+                                    <th>تاريخ الانتهاء</th>
+                                    <th>إجمالي القيمة</th>
+                                    <th>الحالة</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-bookings-table-body">
+                                <!-- Loaded dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIEW: INVOICES -->
+            <section class="portal-tab-view" id="view-invoices" style="display: none;">
+                <div class="glass-card">
+                    <h3>إدارة فواتير العملاء</h3>
+                    <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:20px;">عرض تقارير الفواتير المستحقة مع إمكانية تحويل الحالة يدوياً للدفع عند الاستلام نقداً.</p>
+                    
+                    <div class="table-container">
+                        <table class="custom-table">
+                            <thead>
+                                <tr>
+                                    <th>رقم الفاتورة</th>
+                                    <th>العميل / الشركة</th>
+                                    <th>البيان والتفاصيل</th>
+                                    <th>القيمة المستحقة</th>
+                                    <th>تاريخ الفاتورة</th>
+                                    <th>تاريخ الاستحقاق</th>
+                                    <th>الحالة</th>
+                                    <th>الإجراء</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-invoices-table-body">
+                                <!-- Loaded dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIEW: SUPPORT -->
+            <section class="portal-tab-view" id="view-support" style="display: none;">
+                <div class="chat-wrapper">
+                    <!-- Client Chat List -->
+                    <div class="glass-card chat-sidebar">
+                        <h4 style="margin-bottom: 15px;">استفسارات العملاء</h4>
+                        <div id="admin-chat-list-container">
+                            <!-- Loaded dynamically -->
+                        </div>
+                    </div>
+                    
+                    <!-- Selected Chat Window -->
+                    <div class="chat-main">
+                        <div class="chat-header">
+                            <div class="user-avatar" style="background-color: var(--primary);"><i class="fa-solid fa-user"></i></div>
+                            <div>
+                                <h4 id="admin-chat-header-title">اختر عميل للرد على استفساره</h4>
+                                <small id="admin-chat-header-subtitle">لا توجد محادثة نشطة حالياً</small>
+                            </div>
+                        </div>
+                        
+                        <div class="chat-messages" id="admin-chat-messages-container">
+                            <p style="text-align:center; color:var(--text-muted); margin-top:20px;">يُرجى اختيار العميل من القائمة الجانبية للرد على طلباته.</p>
+                        </div>
+                        
+                        <form id="admin-chat-send-form" class="chat-footer" style="display: none;">
+                            <input type="text" class="form-control" id="admin-chat-input-text" placeholder="اكتب ردك هنا باسم الإدارة..." required autocomplete="off">
+                            <button type="submit" class="btn btn-primary"><i class="fa-regular fa-paper-plane"></i> إرسال الرد</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- App Scripts Dependencies -->
+    <script src="app.js"></script>
+    <script>
+        // Sidebar tab switching
+        const sidebarLinks = document.querySelectorAll('.sidebar-link[data-target]');
+        const tabViews = document.querySelectorAll('.portal-tab-view');
+        
+        let activeClientChatEmail = null;
+
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                const target = this.getAttribute('data-target');
+                switchTab(target);
+            });
+        });
+
+        function switchTab(targetTabId) {
+            sidebarLinks.forEach(link => {
+                if (link.getAttribute('data-target') === targetTabId) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+
+            tabViews.forEach(view => {
+                if (view.id === targetTabId) {
+                    view.style.display = 'block';
+                } else {
+                    view.style.display = 'none';
+                }
+            });
+
+            // Reload data
+            if (targetTabId === 'view-overview') loadStatsOverview();
+            if (targetTabId === 'view-spaces') loadSpacesList();
+            if (targetTabId === 'view-customers') loadCustomersTable();
+            if (targetTabId === 'view-invoices') loadInvoicesTable();
+            if (targetTabId === 'view-support') loadSupportChats();
+        }
+
+        // Stats overview calculator
+        function loadStatsOverview() {
+            const spaces = DB.getSpaces();
+            const bookings = DB.getBookings();
+            const invoices = DB.getInvoices();
+            
+            const unpaid = invoices.filter(inv => inv.status === 'unpaid');
+            const paid = invoices.filter(inv => inv.status === 'paid');
+            const grossRevenue = paid.reduce((sum, inv) => sum + inv.amount, 0);
+
+            document.getElementById('stat-total-spaces').textContent = `${spaces.length} مساحة`;
+            document.getElementById('stat-active-bookings').textContent = `${bookings.length} عقد`;
+            document.getElementById('stat-total-revenue').textContent = `${grossRevenue.toLocaleString('ar-SA')} ريال`;
+            document.getElementById('stat-unpaid-count').textContent = `${unpaid.length} فواتير`;
+        }
+
+        // Add space form handler
+        document.getElementById('add-space-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const space = {
+                name: document.getElementById('space-name').value.trim(),
+                branchId: parseInt(document.getElementById('space-branch').value),
+                type: document.getElementById('space-type').value,
+                price: parseFloat(document.getElementById('space-price').value),
+                pricePeriod: document.getElementById('space-period').value,
+                capacity: document.getElementById('space-capacity').value.trim(),
+                image: "https://superoffice.sa/uploads/offices/1721640105.webp" // Default dummy office image
+            };
+
+            DB.addSpace(space);
+            alert(`تم إضافة المساحة "${space.name}" بنجاح وحفظها في قاعدة البيانات الصورية!`);
+            
+            // Clear inputs
+            document.getElementById('space-name').value = '';
+            document.getElementById('space-price').value = '';
+            document.getElementById('space-capacity').value = '';
+            
+            loadSpacesList();
+        });
+
+        // Load spaces grid
+        function loadSpacesList() {
+            const spaces = DB.getSpaces();
+            const branches = DB.getBranches();
+            const container = document.getElementById('admin-spaces-grid-container');
+            container.innerHTML = '';
+            
+            spaces.forEach(s => {
+                const branchName = branches.find(b => b.id === s.branchId)?.name || 'فرع آخر';
+                
+                let typeName = s.type;
+                if (s.type === 'private-office') typeName = 'مكتب خاص';
+                if (s.type === 'coworking-space') typeName = 'عمل مشترك';
+                if (s.type === 'virtual-office') typeName = 'مكتب افتراضي';
+                if (s.type === 'warehouse') typeName = 'مستودع';
+                
+                const card = document.createElement('div');
+                card.className = 'glass-card admin-space-card';
+                card.innerHTML = `
+                    <div class="delete-space-btn" onclick="deleteSpace('${s.id}')"><i class="fa-solid fa-trash-can"></i></div>
+                    <img src="${s.image}" style="height:150px; width:100%; object-fit:cover; border-radius:10px; margin-bottom:15px;" alt="مكتب">
+                    <h4 style="font-weight:700; margin-bottom:5px;">${s.name}</h4>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:10px;">
+                        <i class="fa-solid fa-map-pin" style="color:var(--primary);"></i> ${branchName} | <i class="fa-solid fa-chair" style="color:var(--primary);"></i> ${s.capacity}
+                    </p>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span class="badge badge-success">${typeName}</span>
+                        <strong class="font-number" style="color:var(--primary); font-size:1.1rem;">${s.price} ريال / ${s.pricePeriod}</strong>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        window.deleteSpace = function(spaceId) {
+            if (confirm('هل أنت متأكد من رغبتك في حذف هذا المكتب من فروع المنصة؟')) {
+                DB.deleteSpace(spaceId);
+                loadSpacesList();
+            }
+        };
+
+        // Load Customers Contracts table
+        function loadCustomersTable() {
+            const bookings = DB.getBookings();
+            const tbody = document.getElementById('admin-bookings-table-body');
+            tbody.innerHTML = '';
+            
+            bookings.forEach(b => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="font-number">${b.id}</td>
+                    <td><strong>${b.clientName}</strong></td>
+                    <td>${b.type}</td>
+                    <td>${b.branch}</td>
+                    <td class="font-number">${b.startDate}</td>
+                    <td class="font-number">${b.endDate}</td>
+                    <td class="font-number" style="font-weight:700;">${b.amount} ريال</td>
+                    <td><span class="badge badge-success">${b.status}</span></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Load Invoices Overview table
+        function loadInvoicesTable() {
+            const invoices = DB.getInvoices();
+            const tbody = document.getElementById('admin-invoices-table-body');
+            tbody.innerHTML = '';
+            
+            invoices.forEach(inv => {
+                const tr = document.createElement('tr');
+                const isUnpaid = inv.status === 'unpaid';
+                
+                tr.innerHTML = `
+                    <td class="font-number">${inv.id}</td>
+                    <td><strong>${inv.clientName}</strong></td>
+                    <td>${inv.type}</td>
+                    <td class="font-number" style="font-weight:700;">${inv.amount} ريال</td>
+                    <td class="font-number">${inv.date}</td>
+                    <td class="font-number">${inv.dueDate}</td>
+                    <td>
+                        <span class="badge ${isUnpaid ? 'badge-danger' : 'badge-success'}">
+                            ${isUnpaid ? 'غير مدفوعة' : 'مدفوعة'}
+                        </span>
+                    </td>
+                    <td>
+                        ${isUnpaid ? `<button class="btn btn-outline btn-sm" onclick="markPaid('${inv.id}')"><i class="fa-solid fa-check"></i> تأكيد السداد</button>` : `<span style="color:var(--success); font-weight:600;"><i class="fa-solid fa-circle-check"></i> مدفوعة بالكامل</span>`}
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        window.markPaid = function(invoiceId) {
+            DB.updateInvoiceStatus(invoiceId, 'paid');
+            alert(`تم تحويل حالة الفاتورة ${invoiceId} بنجاح إلى مدفوعة!`);
+            loadInvoicesTable();
+        };
+
+        // Support chats logic
+        const chatListContainer = document.getElementById('admin-chat-list-container');
+        const chatMessagesContainer = document.getElementById('admin-chat-messages-container');
+        const chatSendForm = document.getElementById('admin-chat-send-form');
+        const chatInputText = document.getElementById('admin-chat-input-text');
+        const chatHeaderTitle = document.getElementById('admin-chat-header-title');
+        const chatHeaderSubtitle = document.getElementById('admin-chat-header-subtitle');
+
+        function loadSupportChats() {
+            const chats = DB.getChats();
+            chatListContainer.innerHTML = '';
+            
+            chats.forEach(chat => {
+                const item = document.createElement('div');
+                item.className = `chat-user-item ${activeClientChatEmail === chat.clientEmail ? 'active' : ''}`;
+                item.onclick = () => selectChat(chat.clientEmail, chat.clientName);
+                
+                const lastMsg = chat.messages[chat.messages.length - 1];
+                const textPreview = lastMsg ? lastMsg.text : 'لا توجد رسائل';
+                
+                item.innerHTML = `
+                    <div class="user-avatar" style="background-color: var(--primary); color:white;">${chat.clientName.charAt(0)}</div>
+                    <div class="chat-user-info">
+                        <h4>${chat.clientName}</h4>
+                        <p>${textPreview}</p>
+                    </div>
+                `;
+                chatListContainer.appendChild(item);
+            });
+        }
+
+        function selectChat(email, name) {
+            activeClientChatEmail = email;
+            chatHeaderTitle.textContent = name;
+            chatHeaderSubtitle.innerHTML = `<span style="color:var(--success); font-weight:600;"><i class="fa-solid fa-circle"></i> متصل للتراسل</span>`;
+            chatSendForm.style.display = 'flex';
+            
+            loadSupportChats(); // rerender sidebar list to reflect active class
+            renderChatMessages();
+        }
+
+        function renderChatMessages() {
+            const chats = DB.getChats();
+            const chat = chats.find(c => c.clientEmail === activeClientChatEmail);
+            
+            chatMessagesContainer.innerHTML = '';
+            
+            if (!chat || chat.messages.length === 0) return;
+            
+            chat.messages.forEach(msg => {
+                const bubble = document.createElement('div');
+                // sender is admin -> sent, client -> received (since we are admin now!)
+                bubble.className = `chat-bubble ${msg.sender === 'admin' ? 'sent' : 'received'}`;
+                
+                const timeFormatted = new Date(msg.time).toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' });
+                bubble.innerHTML = `
+                    <span>${msg.text}</span>
+                    <span class="chat-time">${timeFormatted}</span>
+                `;
+                chatMessagesContainer.appendChild(bubble);
+            });
+            
+            chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+        }
+
+        chatSendForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const text = chatInputText.value.trim();
+            if (!text || !activeClientChatEmail) return;
+            
+            DB.sendChatMessage(activeClientChatEmail, text, 'admin');
+            chatInputText.value = '';
+            renderChatMessages();
+            loadSupportChats();
+        });
+
+        // Initial Load
+        loadStatsOverview();
+    </script>
+</body>
+</html>
