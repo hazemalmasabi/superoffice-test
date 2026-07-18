@@ -11,10 +11,7 @@ const DEFAULT_SPACES = [
     { id: 887, name: "مكتب خاص 7-GH", branchId: 1, type: "private-office", capacity: "1-6", price: 6500, pricePeriod: "شهر", state: 1, image: "https://superoffice.sa/uploads/offices/1721636807.webp" },
     { id: 884, name: "مكتب خاص 7-CD", branchId: 1, type: "private-office", capacity: "1-6", price: 5300, pricePeriod: "شهر", state: 1, image: "https://superoffice.sa/uploads/offices/1721636653.webp" },
     { id: 901, name: "مساحة عمل مشتركة (عضوية سنوية)", branchId: 1, type: "coworking-space", capacity: "1", price: 4599, pricePeriod: "سنة", state: 1, image: "https://superoffice.sa/uploads/offices/1722154211.webp" },
-    { id: 902, name: "مكتب افتراضي بلاتيني (توثيق إيجار)", branchId: 9, type: "virtual-office", capacity: "1", price: 9900, pricePeriod: "سنة", state: 1, image: "https://superoffice.sa/uploads/offices/1722156725.webp" },
-    { id: 903, name: "مستودع تخزين آمن للمواد", branchId: 4, type: "warehouse", capacity: "10-20", price: 200, pricePeriod: "متر مربع/شهر", state: 2, image: "https://superoffice.sa/uploads/pages/item_1_148.webp" },
-    { id: 904, name: "قاعة اجتماعات 11-E الفاخرة", branchId: 1, type: "meeting-room", capacity: "11-14", price: 150, pricePeriod: "ساعة", state: 1, image: "https://superoffice.sa/uploads/pages/video1757572854.jpg" },
-    { id: 905, name: "غرفة اجتماعات Z-03 الصغيرة", branchId: 4, type: "meeting-room", capacity: "2-5", price: 80, pricePeriod: "ساعة", state: 1, image: "https://superoffice.sa/uploads/pages/video1757572911.jpg" }
+    { id: 902, name: "مكتب افتراضي بلاتيني (توثيق إيجار)", branchId: 9, type: "virtual-office", capacity: "1", price: 9900, pricePeriod: "سنة", state: 1, image: "https://superoffice.sa/uploads/offices/1722156725.webp" }
 ];
 
 const DEFAULT_INVOICES = [
@@ -75,6 +72,12 @@ function initDB() {
                 updated = true;
             }
         });
+        // Remove spaces with id 903, 904, 905 if they exist in localStorage
+        const filtered = spaces.filter(s => s.id !== 903 && s.id !== 904 && s.id !== 905);
+        if (filtered.length !== spaces.length) {
+            spaces = filtered;
+            updated = true;
+        }
         if (updated) localStorage.setItem("so_spaces", JSON.stringify(spaces));
     }
     

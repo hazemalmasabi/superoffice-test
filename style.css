@@ -2040,3 +2040,117 @@ body.dark-mode .dark-mode-toggle-btn:hover {
     background: var(--grey-200);
 }
 
+/* ==================== Premium Services Styles ==================== */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.service-card {
+    background: rgba(255, 255, 255, 0.45) !important;
+    border: 1px solid rgba(226, 98, 59, 0.15) !important;
+    border-radius: 20px !important;
+    padding: 35px 25px !important;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: right;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02) !important;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(226, 98, 59, 0.05) 0%, transparent 100%) !important;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+}
+
+.service-card:hover {
+    transform: translateY(-8px) !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 20px 40px rgba(226, 98, 59, 0.08) !important;
+}
+
+.service-card:hover::before {
+    opacity: 1;
+}
+
+.service-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(226, 98, 59, 0.12) 0%, rgba(226, 98, 59, 0.03) 100%) !important;
+    color: var(--primary) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 1;
+    transition: all 0.4s ease;
+    box-shadow: inset 0 0 12px rgba(226, 98, 59, 0.1) !important;
+}
+
+.service-card:hover .service-icon {
+    background: var(--primary) !important;
+    color: var(--white) !important;
+    transform: scale(1.1) rotate(5deg) !important;
+    box-shadow: 0 8px 20px rgba(226, 98, 59, 0.3) !important;
+}
+
+.service-card h3 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--dark-slate);
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+}
+
+.service-card p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 1;
+    flex-grow: 1;
+}
+
+.service-link {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--primary) !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+}
+
+.service-link i {
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-link {
+    color: var(--primary-hover) !important;
+}
+
+.service-card:hover .service-link i {
+    transform: translateX(-5px) !important;
+}
+
