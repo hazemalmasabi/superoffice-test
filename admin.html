@@ -114,63 +114,150 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- SVG Charts Section -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px;">
+                    <!-- Sales Trend Chart (Line Chart SVG) -->
+                    <div class="glass-card">
+                        <h3><i class="fa-solid fa-chart-line" style="color: var(--primary);"></i> نمو المبيعات والإيرادات التعاقدية (الرياض)</h3>
+                        <div class="chart-container-box">
+                            <svg viewBox="0 0 500 200" class="chart-svg" id="revenue-line-chart">
+                                <!-- Grid Lines -->
+                                <line x1="40" y1="20" x2="480" y2="20" stroke="var(--grey-200)" stroke-width="1" stroke-dasharray="4" />
+                                <line x1="40" y1="70" x2="480" y2="70" stroke="var(--grey-200)" stroke-width="1" stroke-dasharray="4" />
+                                <line x1="40" y1="120" x2="480" y2="120" stroke="var(--grey-200)" stroke-width="1" stroke-dasharray="4" />
+                                <line x1="40" y1="170" x2="480" y2="170" stroke="var(--grey-200)" stroke-width="2" />
+                                
+                                <!-- Chart Path Line -->
+                                <path d="M40 170 L120 140 L200 110 L280 80 L360 45 L480 30" fill="none" stroke="var(--primary)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                                
+                                <!-- Interactive Dots -->
+                                <circle cx="40" cy="170" r="6" fill="var(--primary)" stroke="var(--white)" stroke-width="2" style="cursor: pointer;" onclick="showChartValue(event, 'يناير: 15,000 ريال')" />
+                                <circle cx="120" cy="140" r="6" fill="var(--primary)" stroke="var(--white)" stroke-width="2" style="cursor: pointer;" onclick="showChartValue(event, 'فبراير: 24,000 ريال')" />
+                                <circle cx="200" cy="110" r="6" fill="var(--primary)" stroke="var(--white)" stroke-width="2" style="cursor: pointer;" onclick="showChartValue(event, 'مارس: 38,000 ريال')" />
+                                <circle cx="280" cy="80" r="6" fill="var(--primary)" stroke="var(--white)" stroke-width="2" style="cursor: pointer;" onclick="showChartValue(event, 'أبريل: 55,000 ريال')" />
+                                <circle cx="360" cy="45" r="6" fill="var(--primary)" stroke="var(--white)" stroke-width="2" style="cursor: pointer;" onclick="showChartValue(event, 'مايو: 82,000 ريال')" />
+                                <circle cx="480" cy="30" r="6" fill="var(--primary)" stroke="var(--white)" stroke-width="2" style="cursor: pointer;" onclick="showChartValue(event, 'يونيو: 125,000 ريال')" />
+                                
+                                <!-- Labels -->
+                                <text x="40" y="190" fill="var(--text-muted)" font-size="10" font-weight="700" text-anchor="middle">يناير</text>
+                                <text x="120" y="190" fill="var(--text-muted)" font-size="10" font-weight="700" text-anchor="middle">فبراير</text>
+                                <text x="200" y="190" fill="var(--text-muted)" font-size="10" font-weight="700" text-anchor="middle">مارس</text>
+                                <text x="280" y="190" fill="var(--text-muted)" font-size="10" font-weight="700" text-anchor="middle">أبريل</text>
+                                <text x="360" y="190" fill="var(--text-muted)" font-size="10" font-weight="700" text-anchor="middle">مايو</text>
+                                <text x="480" y="190" fill="var(--text-muted)" font-size="10" font-weight="700" text-anchor="middle">يونيو</text>
+                            </svg>
+                            <div class="chart-tooltip-svg" id="chart-tooltip">قيمة الإيرادات</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Occupancy Donut Chart (SVG Circle) -->
+                    <div class="glass-card">
+                        <h3><i class="fa-solid fa-percent" style="color: var(--primary);"></i> نسب إشغال المكاتب والغرف المشتركة</h3>
+                        <div class="chart-container-box">
+                            <svg viewBox="0 0 200 200" class="chart-svg">
+                                <circle cx="100" cy="100" r="70" fill="transparent" stroke="var(--grey-200)" stroke-width="20" />
+                                <circle cx="100" cy="100" r="70" fill="transparent" stroke="var(--primary)" stroke-width="20" 
+                                        stroke-dasharray="440" stroke-dashoffset="110" class="donut-segment" id="occupancy-donut" />
+                                <text x="100" y="105" fill="var(--dark-slate)" font-size="20" font-weight="900" text-anchor="middle" id="occupancy-percent-text">75%</text>
+                                <text x="100" y="125" fill="var(--text-muted)" font-size="10" font-weight="700" text-anchor="middle">نسبة الإشغال</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <!-- VIEW: SPACES -->
             <section class="portal-tab-view" id="view-spaces" style="display: none;">
                 <!-- Add New Space Form -->
-                <div class="glass-card" style="margin-bottom: 30px;">
-                    <h3><i class="fa-solid fa-circle-plus" style="color:var(--primary);"></i> إضافة مساحة أو مكتب جديد للفرع</h3>
-                    <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:20px;">قم بإدخال بيانات المساحة وتحديد الفرع لتعرض فوراً للزوار لحجزها.</p>
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 30px; margin-bottom: 30px;">
+                    <!-- Add Form -->
+                    <div class="glass-card">
+                        <h3><i class="fa-solid fa-circle-plus" style="color:var(--primary);"></i> إضافة مساحة أو مكتب جديد للفرع</h3>
+                        <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:20px;">قم بإدخال بيانات المساحة وتحديد الفرع لتعرض فوراً للزوار لحجزها.</p>
+                        
+                        <form id="add-space-form">
+                            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+                                <div class="form-group">
+                                    <label>اسم / رقم المكتب *</label>
+                                    <input type="text" class="form-control" id="space-name" placeholder="مثال: مكتب 10-A" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>الفرع التابع له *</label>
+                                    <select class="form-control" id="space-branch" required>
+                                        <option value="1">فرع العارض</option>
+                                        <option value="4">فرع السويدي</option>
+                                        <option value="9">فرع الروضة</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>نوع المساحة *</label>
+                                    <select class="form-control" id="space-type" required>
+                                        <option value="private-office">مكتب خاص</option>
+                                        <option value="coworking-space">مساحة عمل مشترك</option>
+                                        <option value="virtual-office">مكتب افتراضي</option>
+                                        <option value="meeting-room">قاعة اجتماعات</option>
+                                        <option value="warehouse">مستودع</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>السعر بالريال *</label>
+                                    <input type="number" class="form-control font-number" id="space-price" placeholder="4500" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>دورة السعر *</label>
+                                    <select class="form-control" id="space-period" required>
+                                        <option value="شهر">شهرياً</option>
+                                        <option value="سنة">سنوياً</option>
+                                        <option value="ساعة">بالساعة</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>سعة الأفراد *</label>
+                                    <input type="text" class="form-control" id="space-capacity" placeholder="مثال: 1 - 4 موظفين" required>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary" style="margin-top: 15px; width: 100%;"><i class="fa-solid fa-folder-plus"></i> إضافة المساحة وحفظها</button>
+                        </form>
+                    </div>
                     
-                    <form id="add-space-form">
-                        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:20px;">
-                            <div class="form-group">
-                                <label>اسم / رقم المكتب *</label>
-                                <input type="text" class="form-control" id="space-name" placeholder="مثال: مكتب 10-A" required>
+                    <!-- Live Preview Card -->
+                    <div class="glass-card" style="display: flex; flex-direction: column; justify-content: center;">
+                        <h4 style="margin-bottom: 15px; text-align: center; color: var(--primary); font-weight: 800;"><i class="fa-solid fa-eye"></i> معاينة كرت المكتب الحية</h4>
+                        <div class="glass-card space-search-card" style="margin: 0; box-shadow: none; border-color: rgba(226, 98, 59, 0.2);">
+                            <div class="space-card-img-wrapper">
+                                <img id="preview-card-image" src="https://superoffice.sa/uploads/offices/1721640105.webp" alt="معاينة">
+                                <span class="badge badge-success space-card-status-badge">
+                                    <i class="fa-solid fa-check"></i> متاح
+                                </span>
                             </div>
-                            
-                            <div class="form-group">
-                                <label>الفرع التابع له *</label>
-                                <select class="form-control" id="space-branch" required>
-                                    <option value="1">فرع العارض</option>
-                                    <option value="4">فرع السويدي</option>
-                                    <option value="9">فرع الروضة</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label>نوع المساحة *</label>
-                                <select class="form-control" id="space-type" required>
-                                    <option value="private-office">مكتب خاص</option>
-                                    <option value="coworking-space">مساحة عمل مشترك</option>
-                                    <option value="virtual-office">مكتب افتراضي</option>
-                                    <option value="warehouse">مستودع</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label>السعر بالريال *</label>
-                                <input type="number" class="form-control font-number" id="space-price" placeholder="4500" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label>دورة السعر *</label>
-                                <select class="form-control" id="space-period" required>
-                                    <option value="شهر">شهرياً</option>
-                                    <option value="سنة">سنوياً</option>
-                                    <option value="ساعة">بالساعة</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label>سعة الأفراد *</label>
-                                <input type="text" class="form-control" id="space-capacity" placeholder="مثال: 1 - 4 موظفين" required>
+                            <div class="space-card-body" style="padding: 15px;">
+                                <h3 id="preview-card-name">مكتب جديد</h3>
+                                <div class="space-card-meta" style="margin-bottom: 8px;">
+                                    <div class="space-card-meta-item">
+                                        <i class="fa-solid fa-map-pin"></i>
+                                        <span id="preview-card-branch">فرع العارض</span>
+                                    </div>
+                                    <div class="space-card-meta-item">
+                                        <i class="fa-solid fa-user-group"></i>
+                                        <span id="preview-card-capacity">سعة: 1-4 أفراد</span>
+                                    </div>
+                                </div>
+                                <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:10px;">نوع الخدمة: <strong id="preview-card-type">مكتب خاص</strong></p>
+                                <div class="space-card-price-row">
+                                    <div class="space-card-price" id="preview-card-price" style="font-size: 1.1rem;">
+                                        4500 <span>ريال / شهر</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        
-                        <button type="submit" class="btn btn-primary" style="margin-top: 10px;"><i class="fa-solid fa-folder-plus"></i> إضافة المساحة وحفظها</button>
-                    </form>
+                    </div>
                 </div>
 
                 <!-- Existing Spaces List -->
@@ -282,6 +369,10 @@
         
         let activeClientChatEmail = null;
 
+        // Ensure Light Mode is always active
+        document.body.classList.remove('dark-mode');
+        localStorage.removeItem('theme');
+
         sidebarLinks.forEach(link => {
             link.addEventListener('click', function() {
                 const target = this.getAttribute('data-target');
@@ -308,7 +399,10 @@
 
             // Reload data
             if (targetTabId === 'view-overview') loadStatsOverview();
-            if (targetTabId === 'view-spaces') loadSpacesList();
+            if (targetTabId === 'view-spaces') {
+                loadSpacesList();
+                updateLivePreview();
+            }
             if (targetTabId === 'view-customers') loadCustomersTable();
             if (targetTabId === 'view-invoices') loadInvoicesTable();
             if (targetTabId === 'view-support') loadSupportChats();
@@ -328,20 +422,54 @@
             document.getElementById('stat-active-bookings').textContent = `${bookings.length} عقد`;
             document.getElementById('stat-total-revenue').textContent = `${grossRevenue.toLocaleString('ar-SA')} ريال`;
             document.getElementById('stat-unpaid-count').textContent = `${unpaid.length} فواتير`;
+
+            updateDonutChart();
         }
+
+        // Donut Chart Occupancy calculation
+        function updateDonutChart() {
+            const spaces = DB.getSpaces();
+            const occupiedCount = spaces.filter(s => s.state !== 1).length;
+            const percent = Math.round((occupiedCount / spaces.length) * 100) || 45;
+            
+            document.getElementById('occupancy-percent-text').textContent = percent + '%';
+            
+            // stroke dasharray is 440 (circumference). offset = 440 - (440 * percent / 100)
+            const offset = 440 - (440 * percent / 100);
+            document.getElementById('occupancy-donut').setAttribute('stroke-dashoffset', offset);
+        }
+
+        // SVG Chart interaction
+        window.showChartValue = function(event, text) {
+            const tooltip = document.getElementById('chart-tooltip');
+            tooltip.textContent = text;
+            tooltip.style.display = 'block';
+            
+            const rect = event.target.getBoundingClientRect();
+            const parentRect = event.target.parentElement.parentElement.getBoundingClientRect();
+            
+            tooltip.style.left = (rect.left - parentRect.left - 20) + 'px';
+            tooltip.style.top = (rect.top - parentRect.top - 35) + 'px';
+        };
 
         // Add space form handler
         document.getElementById('add-space-form').addEventListener('submit', function(e) {
             e.preventDefault();
             
+            const spaceType = document.getElementById('space-type').value;
+            let imgUrl = "https://superoffice.sa/uploads/offices/1721640105.webp";
+            if (spaceType === 'coworking-space') imgUrl = "https://superoffice.sa/uploads/pages/1736932403.jpg";
+            if (spaceType === 'meeting-room') imgUrl = "https://superoffice.sa/uploads/pages/1736932145.jpg";
+            if (spaceType === 'virtual-office') imgUrl = "https://superoffice.sa/uploads/pages/1736932598.jpg";
+
             const space = {
                 name: document.getElementById('space-name').value.trim(),
                 branchId: parseInt(document.getElementById('space-branch').value),
-                type: document.getElementById('space-type').value,
+                type: spaceType,
                 price: parseFloat(document.getElementById('space-price').value),
                 pricePeriod: document.getElementById('space-period').value,
                 capacity: document.getElementById('space-capacity').value.trim(),
-                image: "https://superoffice.sa/uploads/offices/1721640105.webp" // Default dummy office image
+                image: imgUrl
             };
 
             DB.addSpace(space);
@@ -353,7 +481,47 @@
             document.getElementById('space-capacity').value = '';
             
             loadSpacesList();
+            updateLivePreview();
         });
+
+        // Workspace Live Preview Card generator
+        const spaceNameInput = document.getElementById('space-name');
+        const spaceBranchInput = document.getElementById('space-branch');
+        const spaceTypeInput = document.getElementById('space-type');
+        const spacePriceInput = document.getElementById('space-price');
+        const spacePeriodInput = document.getElementById('space-period');
+        const spaceCapacityInput = document.getElementById('space-capacity');
+
+        function updateLivePreview() {
+            document.getElementById('preview-card-name').textContent = spaceNameInput.value || 'مكتب جديد';
+            
+            const branchText = spaceBranchInput.options[spaceBranchInput.selectedIndex]?.text || 'فرع العارض';
+            document.getElementById('preview-card-branch').textContent = branchText;
+            
+            const typeText = spaceTypeInput.options[spaceTypeInput.selectedIndex]?.text || 'مكتب خاص';
+            document.getElementById('preview-card-type').textContent = typeText;
+            
+            const priceVal = spacePriceInput.value || '4500';
+            const periodVal = spacePeriodInput.value || 'شهر';
+            document.getElementById('preview-card-price').innerHTML = `${priceVal} <span>ريال / ${periodVal}</span>`;
+            
+            const capacityText = spaceCapacityInput.value || '1-4 أفراد';
+            document.getElementById('preview-card-capacity').textContent = `سعة: ${capacityText}`;
+
+            const type = spaceTypeInput.value;
+            let imgUrl = "https://superoffice.sa/uploads/offices/1721640105.webp";
+            if (type === 'coworking-space') imgUrl = "https://superoffice.sa/uploads/pages/1736932403.jpg";
+            if (type === 'meeting-room') imgUrl = "https://superoffice.sa/uploads/pages/1736932145.jpg";
+            if (type === 'virtual-office') imgUrl = "https://superoffice.sa/uploads/pages/1736932598.jpg";
+            document.getElementById('preview-card-image').src = imgUrl;
+        }
+
+        spaceNameInput.addEventListener('input', updateLivePreview);
+        spaceBranchInput.addEventListener('change', updateLivePreview);
+        spaceTypeInput.addEventListener('change', updateLivePreview);
+        spacePriceInput.addEventListener('input', updateLivePreview);
+        spacePeriodInput.addEventListener('change', updateLivePreview);
+        spaceCapacityInput.addEventListener('input', updateLivePreview);
 
         // Load spaces grid
         function loadSpacesList() {
@@ -369,6 +537,7 @@
                 if (s.type === 'private-office') typeName = 'مكتب خاص';
                 if (s.type === 'coworking-space') typeName = 'عمل مشترك';
                 if (s.type === 'virtual-office') typeName = 'مكتب افتراضي';
+                if (s.type === 'meeting-room') typeName = 'قاعة اجتماعات';
                 if (s.type === 'warehouse') typeName = 'مستودع';
                 
                 const card = document.createElement('div');
@@ -488,7 +657,7 @@
         function selectChat(email, name) {
             activeClientChatEmail = email;
             chatHeaderTitle.textContent = name;
-            chatHeaderSubtitle.innerHTML = `<span style="color:var(--success); font-weight:600;"><i class="fa-solid fa-circle"></i> متصل للتراسل</span>`;
+            chatHeaderSubtitle.innerHTML = '';
             chatSendForm.style.display = 'flex';
             
             loadSupportChats(); // rerender sidebar list to reflect active class

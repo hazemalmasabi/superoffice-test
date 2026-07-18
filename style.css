@@ -1587,3 +1587,456 @@ img {
         display: block;
     }
 }
+
+/* ==================== Dark Mode Style System ==================== */
+body.dark-mode {
+    --light-bg: #101213;
+    --white: #1b1e20;
+    --grey-50: #141617;
+    --grey-100: #222629;
+    --grey-200: #2c3135;
+    --grey-300: #3c4247;
+    --grey-500: #8a949d;
+    --grey-700: #ccd5dd;
+    --text-main: #e2e8f0;
+    --text-muted: #94a3b8;
+    --dark-slate: #0b0c0d;
+    --glass-bg: rgba(27, 30, 32, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.3);
+    background-color: var(--light-bg);
+    color: var(--text-main);
+}
+
+body.dark-mode .nav-container, 
+body.dark-mode .main-header,
+body.dark-mode .sidebar {
+    background-color: rgba(27, 30, 32, 0.95);
+    border-bottom-color: var(--grey-200);
+}
+
+body.dark-mode .sidebar-brand {
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+body.dark-mode .sidebar-logout {
+    border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+body.dark-mode .custom-table th {
+    background-color: var(--grey-100);
+    border-bottom-color: var(--grey-200);
+}
+
+body.dark-mode .custom-table td {
+    border-bottom-color: var(--grey-200);
+}
+
+body.dark-mode .form-control {
+    background-color: var(--grey-100);
+    border-color: var(--grey-300);
+    color: var(--text-main);
+}
+
+body.dark-mode .user-profile-menu {
+    background-color: var(--white);
+    border-color: var(--grey-200);
+}
+
+body.dark-mode .accordion-content {
+    background-color: var(--white);
+}
+
+body.dark-mode .chat-main {
+    background-color: var(--white);
+    border-color: var(--grey-200);
+}
+
+body.dark-mode .chat-messages {
+    background-color: var(--grey-50);
+}
+
+body.dark-mode .chat-bubble.received {
+    background-color: var(--grey-200);
+    color: var(--text-main);
+}
+
+body.dark-mode .chat-footer {
+    border-top-color: var(--grey-200);
+}
+
+body.dark-mode .signature-area {
+    background-color: var(--grey-100);
+    border-color: var(--grey-300);
+}
+
+body.dark-mode .modal-content {
+    background-color: var(--white);
+}
+
+/* ==================== Recommender Wizard Styles ==================== */
+.recommender-card {
+    max-width: 650px;
+    margin: 40px auto;
+    padding: 35px;
+    position: relative;
+}
+.recommender-step {
+    display: none;
+    animation: fadeIn 0.4s ease-out;
+}
+.recommender-step.active {
+    display: block;
+}
+.recommender-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin: 25px 0;
+}
+@media (max-width: 480px) {
+    .recommender-options {
+        grid-template-columns: 1fr;
+    }
+}
+.recommender-opt-btn {
+    background: var(--grey-50);
+    border: 2px solid var(--grey-200);
+    padding: 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: var(--transition);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.recommender-opt-btn i {
+    font-size: 1.5rem;
+    color: var(--primary);
+    opacity: 0.8;
+    transition: var(--transition);
+}
+.recommender-opt-btn:hover {
+    border-color: var(--primary);
+    background: rgba(226, 98, 59, 0.03);
+    transform: translateY(-2px);
+}
+.recommender-opt-btn.selected {
+    border-color: var(--primary);
+    background: rgba(226, 98, 59, 0.08);
+    box-shadow: var(--primary-glow);
+}
+.recommender-progress {
+    height: 6px;
+    background: var(--grey-200);
+    border-radius: 3px;
+    margin-bottom: 25px;
+    overflow: hidden;
+}
+.recommender-progress-bar {
+    height: 100%;
+    background: var(--primary);
+    width: 33.33%;
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.recommender-result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+    animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* ==================== Visual Time Slots Scheduler ==================== */
+.time-slots-container {
+    margin-top: 15px;
+    border: 1px solid var(--grey-200);
+    border-radius: 12px;
+    padding: 20px;
+    background: var(--grey-50);
+}
+.time-slots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 12px;
+    margin-top: 15px;
+}
+.time-slot-btn {
+    background: var(--white);
+    border: 1.5px solid var(--grey-300);
+    padding: 10px 5px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+}
+.time-slot-btn:hover:not(.reserved) {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(226, 98, 59, 0.02);
+}
+.time-slot-btn.selected {
+    background: var(--primary);
+    color: var(--white);
+    border-color: var(--primary);
+    box-shadow: var(--primary-glow);
+}
+.time-slot-btn.reserved {
+    background: var(--grey-200);
+    color: var(--grey-500);
+    border-color: var(--grey-200);
+    cursor: not-allowed;
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+/* ==================== Step Wizard styles ==================== */
+.step-indicators-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    position: relative;
+}
+.step-indicators-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 10%;
+    right: 10%;
+    height: 3px;
+    background-color: var(--grey-200);
+    z-index: 1;
+}
+.step-indicator-item {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--grey-200);
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    z-index: 2;
+    transition: var(--transition);
+    border: 3px solid var(--white);
+}
+.step-indicator-item.active {
+    background-color: var(--primary);
+    color: var(--white);
+    box-shadow: var(--primary-glow);
+    border-color: var(--white);
+}
+.step-indicator-item.completed {
+    background-color: var(--success);
+    color: var(--white);
+    border-color: var(--white);
+}
+.wizard-step-pane {
+    display: none;
+    animation: fadeIn 0.4s ease-out;
+}
+.wizard-step-pane.active {
+    display: block;
+}
+.font-signature-preview {
+    margin-top: 15px;
+    padding: 15px;
+    border: 1px solid var(--grey-200);
+    border-radius: 8px;
+    background-color: var(--grey-50);
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: var(--dark-slate);
+    transition: var(--transition);
+}
+.font-selector-list {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+.font-opt-btn {
+    padding: 6px 12px;
+    border: 1px solid var(--grey-300);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    background-color: var(--white);
+    font-weight: 700;
+}
+.font-opt-btn.active {
+    border-color: var(--primary);
+    background-color: rgba(226, 98, 59, 0.05);
+    color: var(--primary);
+}
+
+/* ==================== Printable Invoices Styling ==================== */
+.invoice-print-card {
+    border: 1px solid var(--grey-200);
+    border-radius: 12px;
+    background: var(--white);
+    padding: 40px;
+    box-shadow: var(--card-shadow);
+    position: relative;
+}
+.invoice-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--grey-200);
+    padding-bottom: 25px;
+    margin-bottom: 30px;
+}
+.invoice-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    .invoice-print-card, .invoice-print-card * {
+        visibility: visible;
+    }
+    .invoice-print-card {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+    }
+    .sidebar, .portal-header, .portal-title, .nav-actions, .btn-print-hide {
+        display: none !important;
+    }
+}
+
+/* ==================== WhatsApp Chat UI ==================== */
+.chat-header-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.chat-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+.chat-header-info h4 {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--dark-slate);
+}
+.chat-header-info span {
+    font-size: 0.75rem;
+    color: var(--success);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.chat-bubble-status {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
+    font-size: 0.7rem;
+    opacity: 0.8;
+    margin-top: 3px;
+}
+.chat-ticks {
+    color: #34b7f1;
+}
+.chat-typing-indicator {
+    align-self: flex-end;
+    background-color: var(--grey-200);
+    color: var(--text-muted);
+    padding: 8px 16px;
+    border-radius: 14px;
+    border-top-left-radius: 2px;
+    font-size: 0.8rem;
+    display: none;
+    animation: bubbleIn 0.25s ease-out;
+}
+
+/* ==================== SVG Charts ==================== */
+.chart-container-box {
+    height: 250px;
+    position: relative;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.chart-svg {
+    width: 100%;
+    height: 100%;
+}
+.chart-tooltip-svg {
+    background: var(--dark-slate);
+    color: var(--white);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    position: absolute;
+    pointer-events: none;
+    display: none;
+    z-index: 10;
+}
+.donut-segment {
+    transition: stroke-dashoffset 0.8s ease-out;
+}
+
+/* ==================== Dark Mode Switcher ==================== */
+.dark-mode-toggle-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.25rem;
+    color: var(--dark-slate);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+.dark-mode-toggle-btn:hover {
+    background: var(--grey-100);
+    color: var(--primary);
+}
+body.dark-mode .dark-mode-toggle-btn {
+    color: var(--white);
+}
+body.dark-mode .dark-mode-toggle-btn:hover {
+    background: var(--grey-200);
+}
+

@@ -81,6 +81,108 @@
         </div>
     </section>
 
+    <!-- Space Recommender Wizard Section -->
+    <section class="container" style="padding: 60px 0 20px 0;">
+        <div class="sec-title">
+            <h6>أداة المساعدة الذكية</h6>
+            <h2>ابحث عن مساحتك المثالية في ثوانٍ معدودة</h2>
+        </div>
+        
+        <div class="glass-card recommender-card">
+            <!-- Progress Bar -->
+            <div class="recommender-progress">
+                <div class="recommender-progress-bar" id="recommender-bar"></div>
+            </div>
+            
+            <!-- Step 1: Capacity -->
+            <div class="recommender-step active" id="rec-step-1">
+                <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 10px; color: var(--dark-slate);">1. ما هو حجم فريق العمل المتوقع؟</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">اختر السعة المناسبة لضمان راحة وإنتاجية فريقك.</p>
+                <div class="recommender-options">
+                    <div class="recommender-opt-btn" onclick="setRecValue('capacity', '1', 1)">
+                        <i class="fa-solid fa-user"></i>
+                        <span>فردي (شخص واحد)</span>
+                    </div>
+                    <div class="recommender-opt-btn" onclick="setRecValue('capacity', '1-4', 1)">
+                        <i class="fa-solid fa-users"></i>
+                        <span>فريق صغير (1 - 4 أشخاص)</span>
+                    </div>
+                    <div class="recommender-opt-btn" onclick="setRecValue('capacity', '1-6', 1)">
+                        <i class="fa-solid fa-users-viewfinder"></i>
+                        <span>فريق متوسط (1 - 6 أشخاص)</span>
+                    </div>
+                    <div class="recommender-opt-btn" onclick="setRecValue('capacity', '11-14', 1)">
+                        <i class="fa-solid fa-people-group"></i>
+                        <span>فريق كبير (10 أشخاص وأكثر)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 2: Duration / Type -->
+            <div class="recommender-step" id="rec-step-2">
+                <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 10px; color: var(--dark-slate);">2. ما هي فترة الإيجار ونوع الاستخدام؟</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">نحن نقدم حلولاً مرنة تناسب عقود العمل المختلفة.</p>
+                <div class="recommender-options">
+                    <div class="recommender-opt-btn" onclick="setRecValue('type', 'private-office', 2)">
+                        <i class="fa-solid fa-briefcase"></i>
+                        <span>مكتب خاص مغلق شهري/سنوي</span>
+                    </div>
+                    <div class="recommender-opt-btn" onclick="setRecValue('type', 'coworking-space', 2)">
+                        <i class="fa-solid fa-laptop-code"></i>
+                        <span>مساحة عمل مشتركة مفتوحة</span>
+                    </div>
+                    <div class="recommender-opt-btn" onclick="setRecValue('type', 'meeting-room', 2)">
+                        <i class="fa-solid fa-handshake"></i>
+                        <span>قاعة اجتماعات ذكية بالساعة</span>
+                    </div>
+                    <div class="recommender-opt-btn" onclick="setRecValue('type', 'virtual-office', 2)">
+                        <i class="fa-solid fa-globe"></i>
+                        <span>مكتب افتراضي رسمي (سنوي)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 3: Location -->
+            <div class="recommender-step" id="rec-step-3">
+                <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 10px; color: var(--dark-slate);">3. ما هو الموقع أو الفرع الجغرافي الأقرب لك؟</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">اختر المنطقة الأقرب لأعمالك وعملائك في الرياض.</p>
+                <div class="recommender-options">
+                    <div class="recommender-opt-btn" onclick="setRecValue('branch', '1', 3)">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                        <span>شمال الرياض (فرع العارض)</span>
+                    </div>
+                    <div class="recommender-opt-btn" onclick="setRecValue('branch', '4', 3)">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                        <span>جنوب/غرب الرياض (فرع السويدي)</span>
+                    </div>
+                    <div class="recommender-opt-btn" onclick="setRecValue('branch', '9', 3)">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                        <span>شرق الرياض (فرع الروضة)</span>
+                    </div>
+                    <div class="recommender-opt-btn" onclick="setRecValue('branch', 'any', 3)">
+                        <i class="fa-solid fa-city"></i>
+                        <span>أي موقع متاح حالياً</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Result State -->
+            <div class="recommender-step" id="rec-step-result">
+                <div class="recommender-result">
+                    <i class="fa-solid fa-circle-check" style="font-size: 3.5rem; color: var(--success);"></i>
+                    <h3 style="font-size: 1.5rem; font-weight: 800; color: var(--dark-slate);">المساحة الموصى بها لك</h3>
+                    <div id="rec-space-result-box" style="width: 100%; max-width: 380px; margin: 15px 0;">
+                        <!-- Dynamically filled -->
+                    </div>
+                    <div style="display: flex; gap: 15px;">
+                        <button class="btn btn-outline" onclick="resetRecommender()"><i class="fa-solid fa-rotate-left"></i> إعادة البدء</button>
+                        <a id="rec-book-btn" href="client.html" class="btn btn-primary"><i class="fa-solid fa-check"></i> احجز المساحة الآن</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- About Us Section -->
     <section class="about-section" id="about">
         <div class="container about-grid">
@@ -255,6 +357,18 @@
                             <label class="filter-checkbox-label">
                                 <input type="checkbox" class="filter-type" value="meeting-room"> قاعة اجتماعات
                             </label>
+                        </div>
+                    </div>
+
+                    <!-- Filter: Price Slider -->
+                    <div class="filter-group">
+                        <h4>الحد الأقصى للسعر</h4>
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <input type="range" id="filter-price-slider" min="50" max="15000" step="50" value="15000" style="width: 100%; accent-color: var(--primary);">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); font-weight: 700;">
+                                <span>50 ريال</span>
+                                <span id="price-slider-value">15000 ريال</span>
+                            </div>
                         </div>
                     </div>
 
@@ -449,6 +563,12 @@
         const resultsCountText = document.getElementById('results-count-text');
         const resetFiltersBtn = document.getElementById('reset-filters-btn');
         const availableOnlyCheckbox = document.getElementById('filter-available-only');
+        const priceSlider = document.getElementById('filter-price-slider');
+        const priceSliderValue = document.getElementById('price-slider-value');
+
+        // Ensure Light Mode is always active
+        document.body.classList.remove('dark-mode');
+        localStorage.removeItem('theme');
 
         // Toggle mobile nav menu
         document.getElementById('mobile-toggle').addEventListener('click', function() {
@@ -477,10 +597,18 @@
         document.querySelectorAll('.filter-branch').forEach(el => el.addEventListener('change', renderFilteredSpaces));
         document.querySelectorAll('.filter-type').forEach(el => el.addEventListener('change', renderFilteredSpaces));
         availableOnlyCheckbox.addEventListener('change', renderFilteredSpaces);
+        
+        priceSlider.addEventListener('input', function() {
+            priceSliderValue.textContent = priceSlider.value + ' ريال';
+            renderFilteredSpaces();
+        });
+
         resetFiltersBtn.addEventListener('click', function() {
             document.querySelectorAll('.filter-branch').forEach(el => el.checked = false);
             document.querySelectorAll('.filter-type').forEach(el => el.checked = false);
             availableOnlyCheckbox.checked = false;
+            priceSlider.value = 15000;
+            priceSliderValue.textContent = '15000 ريال';
             renderFilteredSpaces();
         });
 
@@ -492,12 +620,14 @@
             const selectedBranches = Array.from(document.querySelectorAll('.filter-branch:checked')).map(el => parseInt(el.value));
             const selectedTypes = Array.from(document.querySelectorAll('.filter-type:checked')).map(el => el.value);
             const availableOnly = availableOnlyCheckbox.checked;
+            const maxPrice = parseInt(priceSlider.value);
 
             // Filter space arrays
             const filtered = spaces.filter(space => {
                 if (selectedBranches.length > 0 && !selectedBranches.includes(space.branchId)) return false;
                 if (selectedTypes.length > 0 && !selectedTypes.includes(space.type)) return false;
                 if (availableOnly && space.state !== 1) return false;
+                if (space.price > maxPrice) return false;
                 return true;
             });
 
@@ -564,13 +694,82 @@
         window.triggerSpaceBooking = function(spaceId, spaceName) {
             const user = DB.getCurrentUser();
             if (user && user.type === 'client') {
-                // If user is logged in, redirect directly to portal with spaceId prefilled
                 window.location.href = `client.html?book=${spaceId}`;
             } else {
-                // Redirect with alert notice
                 alert(`تنبيه الحجز الآمن:\nلإتمام حجز "${spaceName}"، يجب تسجيل الدخول أو إنشاء حساب عميل أولاً لتوثيق بياناتك وحفظ توقيعك على العقد الرقمي الموحد.`);
                 window.location.href = `client.html?book=${spaceId}`;
             }
+        };
+
+        // Recommender State
+        const recAnswers = { capacity: null, type: null, branch: null };
+
+        window.setRecValue = function(key, value, currentStep) {
+            recAnswers[key] = value;
+            
+            const stepPane = document.getElementById(`rec-step-${currentStep}`);
+            stepPane.querySelectorAll('.recommender-opt-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+            
+            setTimeout(() => {
+                goToRecStep(currentStep + 1);
+            }, 300);
+        };
+
+        function goToRecStep(step) {
+            const progressPercent = step === 1 ? 25 : step === 2 ? 50 : step === 3 ? 75 : 100;
+            document.getElementById('recommender-bar').style.width = progressPercent + '%';
+
+            document.querySelectorAll('.recommender-step').forEach(pane => {
+                pane.classList.remove('active');
+            });
+
+            if (step <= 3) {
+                document.getElementById(`rec-step-${step}`).classList.add('active');
+            } else {
+                document.getElementById('rec-step-result').classList.add('active');
+                calculateRecommendation();
+            }
+        }
+
+        function calculateRecommendation() {
+            const spaces = DB.getSpaces();
+            const branches = DB.getBranches();
+            
+            let match = spaces.find(space => {
+                if (recAnswers.type && space.type !== recAnswers.type) return false;
+                if (recAnswers.branch && recAnswers.branch !== 'any' && space.branchId !== parseInt(recAnswers.branch)) return false;
+                return true;
+            });
+
+            if (!match) {
+                match = spaces.find(space => space.state === 1) || spaces[0];
+            }
+
+            const branchName = branches.find(b => b.id === match.branchId)?.name || 'فرع الرياض';
+            const resultBox = document.getElementById('rec-space-result-box');
+            
+            resultBox.innerHTML = `
+                <div class="glass-card" style="padding: 15px; border-color: var(--primary); background: linear-gradient(135deg, rgba(226, 98, 59, 0.03) 0%, var(--white) 100%); text-align: right;">
+                    <img src="${match.image}" style="width: 100%; height: 140px; object-fit: cover; border-radius: 8px; margin-bottom: 10px;" alt="${match.name}">
+                    <h4 style="font-weight: 800; color: var(--dark-slate); margin-bottom: 5px;">${match.name}</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;"><i class="fa-solid fa-map-pin"></i> ${branchName} | سعة: ${match.capacity}</p>
+                    <p style="font-weight: 800; color: var(--primary); font-size: 1.15rem;">${match.price} ريال / ${match.pricePeriod}</p>
+                </div>
+            `;
+
+            document.getElementById('rec-book-btn').href = `client.html?book=${match.id}`;
+        }
+
+        window.resetRecommender = function() {
+            recAnswers.capacity = null;
+            recAnswers.type = null;
+            recAnswers.branch = null;
+            
+            document.querySelectorAll('.recommender-opt-btn').forEach(btn => btn.classList.remove('selected'));
+            goToRecStep(1);
         };
 
         // Render initially
